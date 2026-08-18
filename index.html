@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Orbit Shift is an interactive game for learning Flexbox through eight space missions."
+    >
+    <title>Orbit Shift | Learn Flexbox</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="#game" aria-label="Orbit Shift home">
+          <span class="brand-mark" aria-hidden="true">OS</span>
+          <span>Orbit Shift</span>
+        </a>
+
+        <div class="header-stats" aria-label="Game summary">
+          <span><strong id="headerScore">0</strong> points</span>
+          <span><strong id="headerCompleted">0</strong> / 8 cleared</span>
+        </div>
+      </div>
+    </header>
+
+    <main id="game">
+      <section class="hero container" aria-labelledby="page-title">
+        <p class="eyebrow">Flexbox training simulator</p>
+        <h1 id="page-title">Guide the fleet.<br>Master the layout.</h1>
+        <p>
+          Change the Flexbox controls to move every spacecraft onto its matching docking beacon.
+          Eight missions take you from the basics to wrapped, reversed formations.
+        </p>
+
+        <div class="progress-block">
+          <div class="progress-copy">
+            <span>Mission progress</span>
+            <span id="progressText">0 of 8 complete</span>
+          </div>
+          <div
+            class="progress-track"
+            role="progressbar"
+            aria-label="Completed missions"
+            aria-valuemin="0"
+            aria-valuemax="8"
+            aria-valuenow="0"
+            id="progressTrack"
+          >
+            <span id="progressBar"></span>
+          </div>
+        </div>
+      </section>
+
+      <nav class="mission-nav container" aria-label="Mission selector" id="missionNav"></nav>
+
+      <section class="workspace container" aria-label="Flexbox mission workspace">
+        <aside class="control-panel" aria-labelledby="missionTitle">
+          <div class="mission-meta">
+            <span id="missionNumber">Mission 1 of 8</span>
+            <span class="difficulty" id="missionDifficulty">Cadet</span>
+          </div>
+
+          <h2 id="missionTitle">Edge of Orbit</h2>
+          <p class="mission-instruction" id="missionInstruction">
+            Place the three scout ships in one row, spread them from edge to edge, and center them vertically.
+          </p>
+
+          <form id="controlForm">
+            <fieldset>
+              <legend>Flex container controls</legend>
+
+              <div class="control-fields">
+                <label>
+                  <span>flex-direction</span>
+                  <select id="flexDirection" name="flex-direction">
+                    <option value="row">row</option>
+                    <option value="row-reverse">row-reverse</option>
+                    <option value="column">column</option>
+                    <option value="column-reverse">column-reverse</option>
+                  </select>
+                </label>
+
+                <label>
+                  <span>justify-content</span>
+                  <select id="justifyContent" name="justify-content">
+                    <option value="flex-start">flex-start</option>
+                    <option value="center">center</option>
+                    <option value="flex-end">flex-end</option>
+                    <option value="space-between">space-between</option>
+                    <option value="space-around">space-around</option>
+                    <option value="space-evenly">space-evenly</option>
+                  </select>
+                </label>
+
+                <label>
+                  <span>align-items</span>
+                  <select id="alignItems" name="align-items">
+                    <option value="flex-start">flex-start</option>
+                    <option value="center">center</option>
+                    <option value="flex-end">flex-end</option>
+                    <option value="stretch">stretch</option>
+                  </select>
+                </label>
+
+                <label>
+                  <span>flex-wrap</span>
+                  <select id="flexWrap" name="flex-wrap">
+                    <option value="nowrap">nowrap</option>
+                    <option value="wrap">wrap</option>
+                    <option value="wrap-reverse">wrap-reverse</option>
+                  </select>
+                </label>
+              </div>
+            </fieldset>
+
+            <div class="code-preview" aria-label="Current CSS declaration">
+              <span class="code-label">Current CSS</span>
+              <pre><code id="codePreview">display: flex;
+flex-direction: row;
+justify-content: flex-start;
+align-items: flex-start;
+flex-wrap: nowrap;</code></pre>
+            </div>
+
+            <div class="form-actions">
+              <button class="button button-secondary" type="button" id="resetButton">Reset mission</button>
+              <button class="button button-primary" type="submit" id="checkButton">Check docking</button>
+            </div>
+          </form>
+
+          <div class="feedback feedback-neutral" id="feedback" role="status" aria-live="polite">
+            Match each ship with a glowing beacon, then check your docking.
+          </div>
+
+          <div class="mission-footer">
+            <span>Attempts: <strong id="attemptCount">0</strong></span>
+            <button class="next-button" type="button" id="nextButton" disabled>
+              Next mission <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </aside>
+
+        <section class="board-panel" aria-labelledby="boardTitle">
+          <div class="board-heading">
+            <div>
+              <p class="eyebrow">Live simulator</p>
+              <h2 id="boardTitle">Docking field</h2>
+            </div>
+            <div class="board-key" aria-label="Board legend">
+              <span><i class="key-ship" aria-hidden="true"></i> Ships</span>
+              <span><i class="key-dock" aria-hidden="true"></i> Targets</span>
+            </div>
+          </div>
+
+          <p class="scroll-note">The mission board is always 640 × 360. On small screens, swipe sideways to inspect it.</p>
+
+          <div class="board-scroll" tabindex="0" aria-label="Scrollable game board">
+            <div class="playfield" id="playfield">
+              <div class="orbit orbit-one" aria-hidden="true"></div>
+              <div class="orbit orbit-two" aria-hidden="true"></div>
+              <div class="target-layer" id="targetLayer" aria-hidden="true"></div>
+              <div class="fleet-layer" id="fleetLayer" aria-label="Spacecraft flex container"></div>
+            </div>
+          </div>
+
+          <p class="board-tip" id="missionTip">
+            Tip: justify-content controls movement along the main axis.
+          </p>
+        </section>
+      </section>
+
+      <section class="completion-panel container" id="completionPanel" hidden aria-labelledby="completionTitle">
+        <div class="completion-icon" aria-hidden="true">★</div>
+        <div>
+          <p class="eyebrow">Flight path complete</p>
+          <h2 id="completionTitle">You mastered all eight formations.</h2>
+          <p id="completionSummary">Your fleet is docked and the Flexbox route is complete.</p>
+        </div>
+        <button class="button button-secondary" type="button" id="restartButton">Start a fresh run</button>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>Orbit Shift — a Flexbox learning game</p>
+        <button type="button" id="clearProgressButton">Clear saved progress</button>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
