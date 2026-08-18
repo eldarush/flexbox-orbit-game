@@ -18,7 +18,7 @@
           <span>Orbit Shift</span>
         </a>
 
-        <div class="header-stats" aria-label="Game summary">
+        <div class="header-stats" role="group" aria-label="Game summary">
           <span><strong id="headerScore">0</strong> points</span>
           <span><strong id="headerCompleted">0</strong> / 8 cleared</span>
         </div>
@@ -39,17 +39,9 @@
             <span>Mission progress</span>
             <span id="progressText">0 of 8 complete</span>
           </div>
-          <div
-            class="progress-track"
-            role="progressbar"
-            aria-label="Completed missions"
-            aria-valuemin="0"
-            aria-valuemax="8"
-            aria-valuenow="0"
-            id="progressTrack"
-          >
-            <span id="progressBar"></span>
-          </div>
+          <progress class="progress-track" aria-label="Completed missions" id="progressTrack" max="8" value="0">
+            0 of 8 complete
+          </progress>
         </div>
       </section>
 
@@ -115,14 +107,14 @@
               </div>
             </fieldset>
 
-            <div class="code-preview" aria-label="Current CSS declaration">
+            <section class="code-preview" aria-label="Current CSS declaration">
               <span class="code-label">Current CSS</span>
               <pre><code id="codePreview">display: flex;
 flex-direction: row;
 justify-content: flex-start;
 align-items: flex-start;
 flex-wrap: nowrap;</code></pre>
-            </div>
+            </section>
 
             <div class="form-actions">
               <button class="button button-secondary" type="button" id="resetButton">Reset mission</button>
@@ -148,7 +140,7 @@ flex-wrap: nowrap;</code></pre>
               <p class="eyebrow">Live simulator</p>
               <h2 id="boardTitle">Docking field</h2>
             </div>
-            <div class="board-key" aria-label="Board legend">
+            <div class="board-key" role="group" aria-label="Board legend">
               <span><i class="key-ship" aria-hidden="true"></i> Ships</span>
               <span><i class="key-dock" aria-hidden="true"></i> Targets</span>
             </div>
@@ -161,7 +153,7 @@ flex-wrap: nowrap;</code></pre>
               <div class="orbit orbit-one" aria-hidden="true"></div>
               <div class="orbit orbit-two" aria-hidden="true"></div>
               <div class="target-layer" id="targetLayer" aria-hidden="true"></div>
-              <div class="fleet-layer" id="fleetLayer" aria-label="Spacecraft flex container"></div>
+              <ul class="fleet-layer" id="fleetLayer" aria-label="Spacecraft flex container"></ul>
             </div>
           </div>
 

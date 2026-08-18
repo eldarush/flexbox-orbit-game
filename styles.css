@@ -191,19 +191,30 @@ h2 {
 }
 
 .progress-track {
+  display: block;
+  width: 100%;
   height: 7px;
   overflow: hidden;
+  border: 0;
   border-radius: 999px;
+  appearance: none;
   background: var(--surface-soft);
 }
 
-.progress-track span {
-  display: block;
-  width: 0;
-  height: 100%;
+.progress-track::-webkit-progress-bar {
+  border-radius: inherit;
+  background: var(--surface-soft);
+}
+
+.progress-track::-webkit-progress-value {
   border-radius: inherit;
   background: linear-gradient(90deg, var(--cyan), #84efaa);
   transition: width 320ms ease;
+}
+
+.progress-track::-moz-progress-bar {
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--cyan), #84efaa);
 }
 
 .mission-nav {
@@ -596,6 +607,9 @@ code {
 
 .fleet-layer {
   z-index: 2;
+  margin: 0;
+  padding: 0;
+  list-style: none;
   transition: opacity 150ms ease;
 }
 

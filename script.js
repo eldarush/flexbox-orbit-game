@@ -159,7 +159,6 @@ const elements = {
   attemptCount: document.querySelector("#attemptCount"),
   progressText: document.querySelector("#progressText"),
   progressTrack: document.querySelector("#progressTrack"),
-  progressBar: document.querySelector("#progressBar"),
   headerScore: document.querySelector("#headerScore"),
   headerCompleted: document.querySelector("#headerCompleted"),
   playfield: document.querySelector("#playfield"),
@@ -274,7 +273,7 @@ function updateFleet() {
 }
 
 function createBoardItem(className, text, label) {
-  const item = document.createElement("div");
+  const item = document.createElement(className === "ship" ? "li" : "div");
   item.className = className;
   item.textContent = text;
   if (label) {
@@ -335,13 +334,11 @@ function renderNavigation() {
 function updateSummary() {
   const completedCount = state.completed.length;
   const totalScore = state.scores.reduce((total, value) => total + value, 0);
-  const progressPercent = (completedCount / missions.length) * 100;
-
   elements.headerScore.textContent = String(totalScore);
   elements.headerCompleted.textContent = String(completedCount);
   elements.progressText.textContent = `${completedCount} of ${missions.length} complete`;
-  elements.progressTrack.setAttribute("aria-valuenow", String(completedCount));
-  elements.progressBar.style.width = `${progressPercent}%`;
+  elements.progressTrack.value = completedCount;
+  elements.progressTrack.textContent = `${completedCount} of ${missions.length} complete`;
 
   const allComplete = completedCount === missions.length;
   elements.completionPanel.hidden = !allComplete;
