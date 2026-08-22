@@ -66,9 +66,8 @@ const missions = [
   {
     title: "Edge of Orbit",
     difficulty: "Cadet",
-    instruction:
-      "Place the three scout ships in one row, spread them from edge to edge, and center them vertically.",
-    tip: "justify-content moves items along the main axis; align-items works across it.",
+    instruction: "Spread three ships across one row and center them vertically.",
+    tip: "Use justify-content and align-items.",
     count: 3,
     icons: ["🚀", "🛸", "🛰️"],
     unitWidth: 72,
@@ -84,9 +83,8 @@ const missions = [
   {
     title: "Lunar Descent",
     difficulty: "Cadet",
-    instruction:
-      "Stack the landers from top to bottom, center the column horizontally, and dock it at the bottom edge.",
-    tip: "With a column direction, the main axis runs from top to bottom.",
+    instruction: "Stack four ships in a centered column at the bottom.",
+    tip: "A column makes the main axis vertical.",
     count: 4,
     icons: ["🛸", "🚀", "🛰️", "🚀"],
     unitWidth: 72,
@@ -102,9 +100,8 @@ const missions = [
   {
     title: "Reverse Convoy",
     difficulty: "Navigator",
-    instruction:
-      "Reverse the flight order, leave equal breathing room around every ship, and keep the convoy at the top.",
-    tip: "row-reverse changes both the visual order and the direction of the main axis.",
+    instruction: "Reverse the row, add equal space around each ship, and keep it at the top.",
+    tip: "row-reverse changes the order and main axis.",
     count: 3,
     icons: ["🛰️", "🚀", "🛸"],
     unitWidth: 72,
@@ -120,9 +117,8 @@ const missions = [
   {
     title: "Station Wall",
     difficulty: "Navigator",
-    instruction:
-      "Build a reversed vertical column, spread the modules between top and bottom, and attach it to the right wall.",
-    tip: "For a vertical main axis, align-items controls left-to-right placement.",
+    instruction: "Make a reversed column, spread it vertically, and place it on the right.",
+    tip: "In a column, align-items moves items left or right.",
     count: 4,
     icons: ["🔭", "🛰️", "🚀", "🛸"],
     unitWidth: 72,
@@ -138,9 +134,8 @@ const missions = [
   {
     title: "Solar Core",
     difficulty: "Navigator",
-    instruction:
-      "Keep one forward-facing row and pull all five craft into a tight formation at the exact center of the field.",
-    tip: "Centering on both axes requires two different Flexbox properties.",
+    instruction: "Center all five ships together in one row.",
+    tip: "Center the main axis and cross axis.",
     count: 5,
     icons: ["🚀", "🛰️", "🛸", "🔭", "🚀"],
     unitWidth: 72,
@@ -156,9 +151,8 @@ const missions = [
   {
     title: "Satellite Sweep",
     difficulty: "Commander",
-    instruction:
-      "Allow the six wide satellites to wrap into new rows, give every craft equal space around it, and center each craft within its row.",
-    tip: "When items no longer fit, flex-wrap lets the container create additional flex lines.",
+    instruction: "Wrap six wide ships into rows with equal space around them.",
+    tip: "flex-wrap creates another line when items do not fit.",
     count: 6,
     icons: ["🛰️", "🔭", "🛰️", "🔭", "🛰️", "🔭"],
     unitWidth: 172,
@@ -175,9 +169,8 @@ const missions = [
   {
     title: "Gravity Channel",
     difficulty: "Commander",
-    instruction:
-      "Form a downward column, distribute the craft between the top and bottom, and hold the column against the left wall.",
-    tip: "Changing flex-direction also changes which physical direction justify-content controls.",
+    instruction: "Make a left-side column spread from top to bottom.",
+    tip: "flex-direction changes the axis used by justify-content.",
     count: 4,
     icons: ["🚀", "🛸", "🚀", "🛰️"],
     unitWidth: 72,
@@ -193,9 +186,8 @@ const missions = [
   {
     title: "Deep-Space Formation",
     difficulty: "Captain",
-    instruction:
-      "Reverse the fleet direction, wrap the eight cruisers into rows, spread each row edge to edge, and dock the ships at the bottom of each line.",
-    tip: "The final formation combines direction, spacing, cross-axis alignment, and wrapping.",
+    instruction: "Reverse and wrap eight ships. Spread each row and align ships to its bottom.",
+    tip: "Combine direction, spacing, alignment, and wrapping.",
     count: 8,
     icons: ["🚀", "🛸", "🛰️", "🔭", "🚀", "🛸", "🛰️", "🔭"],
     unitWidth: 126,
@@ -212,9 +204,8 @@ const missions = [
   {
     title: "Cargo Spacing",
     difficulty: "Commander",
-    instruction:
-      "Centre the four cargo pods on both axes, then push them apart with a fixed 32-pixel gap instead of letting justify-content do the spacing.",
-    tip: "gap adds space between items; justify-content distributes whatever space is left over.",
+    instruction: "Center four cargo pods and place a 32-pixel gap between them.",
+    tip: "gap adds fixed space between items.",
     count: 4,
     icons: ["📦", "📦", "📦", "📦"],
     unitWidth: 72,
@@ -231,9 +222,8 @@ const missions = [
   {
     title: "Twin Decks",
     difficulty: "Commander",
-    instruction:
-      "Wrap the six deck modules onto two lines, centre each line horizontally, and pin one line to the very top of the field and the other to the very bottom.",
-    tip: "justify-content spaces items inside a line; align-content spaces the lines themselves.",
+    instruction: "Wrap six modules into two centered rows at the top and bottom.",
+    tip: "align-content controls space between flex lines.",
     count: 6,
     icons: ["🛰️", "🔭", "🛰️", "🔭", "🛰️", "🔭"],
     unitWidth: 172,
@@ -250,9 +240,8 @@ const missions = [
   {
     title: "Rogue Scout",
     difficulty: "Captain",
-    instruction:
-      "Spread the patrol evenly across the top of the field — but scout 3 breaks formation and drops on its own to the bottom edge.",
-    tip: "align-self overrides align-items for a single flex item.",
+    instruction: "Spread the row across the top, then move ship 3 to the bottom.",
+    tip: "align-self moves one item on the cross axis.",
     count: 4,
     icons: ["🚀", "🚀", "🛸", "🚀"],
     unitWidth: 72,
@@ -270,9 +259,8 @@ const missions = [
   {
     title: "Priority Launch",
     difficulty: "Captain",
-    instruction:
-      "Spread the launch row from edge to edge and centre it vertically, then re-order the queue so the flagship 🛰️ launches first on the left, followed by ships 1, 2 and 3 in their original sequence.",
-    tip: "order changes where an item is painted without touching the HTML.",
+    instruction: "Spread and center the row. Move the satellite to the first position.",
+    tip: "order changes an item's visual position.",
     count: 4,
     icons: ["🚀", "🛸", "🔭", "🛰️"],
     unitWidth: 72,
@@ -365,4 +353,3 @@ function formatDuration(milliseconds) {
   const minutes = Math.floor(totalSeconds / 60);
   return `${minutes}:${String(totalSeconds % 60).padStart(2, "0")}`;
 }
-

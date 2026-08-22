@@ -3,50 +3,40 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Mission log and statistics for the Orbit Shift Flexbox game.">
-    <title>Statistics | Orbit Shift</title>
+    <meta name="description" content="Saved Orbit Shift mission statistics.">
+    <title>Stats | Orbit Shift</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="index.html" aria-label="Orbit Shift home">
-          <span class="brand-mark" aria-hidden="true">OS</span>
-          <span>Orbit Shift</span>
-        </a>
-
-        <a class="header-link" href="index.html">← Back to the game</a>
+        <a class="brand" href="index.html">Orbit Shift</a>
+        <a class="header-link" href="index.html">Back to game</a>
       </div>
     </header>
 
     <main>
-      <section class="hero container" aria-labelledby="page-title">
-        <p class="eyebrow">Flight recorder</p>
-        <h1 id="page-title">Mission log.</h1>
-        <p>
-          Every attempt, solve time, hint and rating recorded on this device, read back from the
-          same saved progress the game uses.
-        </p>
+      <section class="hero hero-small container" aria-labelledby="page-title">
+        <p class="eyebrow">Saved progress</p>
+        <h1 id="page-title">Mission stats</h1>
+        <p>Results stored on this device.</p>
       </section>
 
       <section class="container" aria-label="Overall statistics">
         <ul class="stat-cards" id="statCards"></ul>
       </section>
 
-      <section class="container" aria-labelledby="log-title">
-        <h2 id="log-title" class="section-title">Every mission</h2>
+      <section class="container log-section" aria-labelledby="log-title">
+        <h2 id="log-title" class="section-title">Missions</h2>
 
         <p class="empty-state" id="emptyState" hidden>
-          No missions cleared yet on this device. <a href="index.html">Start the first mission</a>
-          and the log will fill in as you play.
+          No results yet. <a href="index.html">Play mission one.</a>
         </p>
 
         <div class="log-panel" id="logPanel">
           <div class="table-scroll">
             <table>
-              <caption class="visually-hidden">
-                Attempts, time, hints, rating and score for every mission
-              </caption>
+              <caption class="visually-hidden">Saved results for every mission</caption>
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -76,22 +66,22 @@
         </div>
       </section>
 
-      <section class="container" aria-labelledby="scoring-title">
-        <h2 id="scoring-title" class="section-title">How the score is built</h2>
+      <section class="container rules-section" aria-labelledby="scoring-title">
+        <h2 id="scoring-title" class="section-title">Scoring</h2>
         <ul class="rule-list">
-          <li><strong>100 points</strong> for a cleared mission</li>
-          <li><strong>−12 points</strong> for every attempt after the first, never below 40</li>
-          <li><strong>+20 points</strong> for a solve under 30 seconds, <strong>+10</strong> under a minute</li>
-          <li><strong>−15 points</strong> for every hint revealed</li>
-          <li><strong>★★★</strong> first attempt with no hints · <strong>★★</strong> up to three attempts and one hint · <strong>★</strong> otherwise</li>
+          <li>100 points for a clear</li>
+          <li>-12 for each extra attempt</li>
+          <li>Time bonus under one minute</li>
+          <li>-15 for each hint</li>
+          <li>Up to three stars per mission</li>
         </ul>
       </section>
     </main>
 
     <footer class="site-footer">
       <div class="container footer-inner">
-        <p>Orbit Shift — a Flexbox learning game</p>
-        <button type="button" id="clearProgressButton">Clear saved progress</button>
+        <p>Orbit Shift · Flexbox game</p>
+        <button type="button" id="clearProgressButton">Clear progress</button>
       </div>
     </footer>
 
