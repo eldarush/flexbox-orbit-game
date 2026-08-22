@@ -349,14 +349,15 @@ legend {
 select {
   width: 100%;
   min-height: 44px;
-  padding: 0 34px 0 12px;
+  /* The longest value, space-between, has to clear the native dropdown arrow. */
+  padding: 0 26px 0 11px;
   border: 1px solid var(--line);
   border-radius: 11px;
   color: var(--text);
   background: var(--surface-raised);
   cursor: pointer;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.78rem;
+  font-size: 0.72rem;
 }
 
 select:hover,
