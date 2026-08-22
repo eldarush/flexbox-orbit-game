@@ -66,7 +66,7 @@ const missions = [
   {
     title: "Edge of Orbit",
     difficulty: "Cadet",
-    instruction: "Spread three ships across one row and center them vertically.",
+    instruction: "Spread three ships from edge to edge in one row and center them vertically.",
     tip: "Use justify-content and align-items.",
     count: 3,
     icons: ["🚀", "🛸", "🛰️"],
@@ -117,7 +117,7 @@ const missions = [
   {
     title: "Station Wall",
     difficulty: "Navigator",
-    instruction: "Make a reversed column, spread it vertically, and place it on the right.",
+    instruction: "Make a reversed column, spread it from top to bottom, and place it on the right.",
     tip: "In a column, align-items moves items left or right.",
     count: 4,
     icons: ["🔭", "🛰️", "🚀", "🛸"],
@@ -186,7 +186,7 @@ const missions = [
   {
     title: "Deep-Space Formation",
     difficulty: "Captain",
-    instruction: "Reverse and wrap eight ships. Spread each row and align ships to its bottom.",
+    instruction: "Reverse and wrap eight ships. Spread each row edge to edge and drop the ships to the bottom of their row.",
     tip: "Combine direction, spacing, alignment, and wrapping.",
     count: 8,
     icons: ["🚀", "🛸", "🛰️", "🔭", "🚀", "🛸", "🛰️", "🔭"],
@@ -198,7 +198,6 @@ const missions = [
       "justify-content": "space-between",
       "align-items": "flex-end",
       "flex-wrap": "wrap",
-      "align-content": "space-around",
     },
   },
   {
@@ -240,7 +239,7 @@ const missions = [
   {
     title: "Rogue Scout",
     difficulty: "Captain",
-    instruction: "Spread the row across the top, then move ship 3 to the bottom.",
+    instruction: "Space the row evenly across the top, then move ship 3 to the bottom.",
     tip: "align-self moves one item on the cross axis.",
     count: 4,
     icons: ["🚀", "🚀", "🛸", "🚀"],
@@ -259,7 +258,7 @@ const missions = [
   {
     title: "Priority Launch",
     difficulty: "Captain",
-    instruction: "Spread and center the row. Move the satellite to the first position.",
+    instruction: "Spread the row edge to edge and center it. Move the satellite to the first position.",
     tip: "order changes an item's visual position.",
     count: 4,
     icons: ["🚀", "🛸", "🔭", "🛰️"],
