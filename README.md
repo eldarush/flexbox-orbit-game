@@ -56,7 +56,7 @@ the fleet alike, so the target can never drift away from what the player can act
   −15 per hint
 - Progressive hints that name the next property to change, free when nothing is wrong
 - Progress, scores, timings and the player's own answers saved to `localStorage`
-- Mission log table with attempts, time, hints, rating and score for every mission
+- Separate statistics page with summary cards and a per-mission log of attempts, time, hints, rating and score
 - Free navigation back to any completed mission, with the player's saved solution restored
 - Reset to defaults per mission, and a full progress wipe
 - Success and error animations, respecting `prefers-reduced-motion`
@@ -74,8 +74,20 @@ mission's solution, stays identical. The current scale is displayed above the bo
 - No CSS Grid anywhere in the project — every layout uses Flexbox
 - All navigation happens on a single HTML page
 
+## Pages
+
+- `index.html` — the game itself
+- `stats.html` — the mission log and statistics, read back from the same saved progress
+
+Moving between missions never leaves `index.html`; the statistics page is a separate document
+reached from the header, and it only reads progress (or clears it outright).
+
 ## Project files
 
 - `index.html` — semantic game interface
-- `styles.css` — responsive design and Flexbox layouts
-- `script.js` — mission data, controls, geometric validation, scoring and saved progress
+- `stats.html` — mission log and statistics
+- `styles.css` — responsive design and Flexbox layouts, shared by both pages
+- `game-data.js` — mission definitions, control registries, scoring rules and progress loading,
+  shared by both pages
+- `script.js` — controls, geometric validation, scoring, timer and saved progress
+- `stats.js` — statistics cards and the mission log table

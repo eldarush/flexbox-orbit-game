@@ -18,6 +18,8 @@
           <span>Orbit Shift</span>
         </a>
 
+        <a class="header-link" href="stats.html">Statistics</a>
+
         <div class="header-stats" role="group" aria-label="Game summary">
           <span><strong id="headerScore">0</strong> points</span>
           <span><strong id="headerStars">0</strong> stars</span>
@@ -144,37 +146,13 @@
         </section>
       </section>
 
-      <details class="mission-log container" id="missionLog">
-        <summary>Mission log &amp; statistics</summary>
-        <div class="table-scroll">
-          <table>
-            <caption class="visually-hidden">Attempts, time, hints, rating and score for every mission</caption>
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Mission</th>
-                <th scope="col">Status</th>
-                <th scope="col">Attempts</th>
-                <th scope="col">Time</th>
-                <th scope="col">Hints</th>
-                <th scope="col">Rating</th>
-                <th scope="col">Score</th>
-              </tr>
-            </thead>
-            <tbody id="missionLogBody"></tbody>
-            <tfoot>
-              <tr>
-                <th scope="row" colspan="3">Total</th>
-                <td id="totalAttempts">0</td>
-                <td id="totalTime">0:00</td>
-                <td id="totalHints">0</td>
-                <td id="totalStars">0</td>
-                <td id="totalScore">0</td>
-              </tr>
-            </tfoot>
-          </table>
+      <section class="stats-link container" aria-label="Statistics">
+        <div>
+          <p class="eyebrow">Flight recorder</p>
+          <p>Attempts, solve times, hints, ratings and score are recorded for every mission.</p>
         </div>
-      </details>
+        <a class="button button-secondary" href="stats.html">Open mission log &amp; statistics</a>
+      </section>
 
       <section class="completion-panel container" id="completionPanel" hidden aria-labelledby="completionTitle">
         <div class="completion-icon" aria-hidden="true">★</div>
@@ -194,6 +172,7 @@
       </div>
     </footer>
 
+    <script src="game-data.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
