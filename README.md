@@ -1,6 +1,6 @@
 # Orbit Shift
 
-A responsive Flexbox practice game built with semantic HTML, CSS, and vanilla JavaScript.
+A dark-themed, responsive Flexbox practice game built with semantic HTML, CSS, and vanilla JavaScript.
 
 - Live game: https://eldarush.github.io/flexbox-orbit-game/
 - Repository: https://github.com/eldarush/flexbox-orbit-game

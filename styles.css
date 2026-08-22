@@ -1,22 +1,23 @@
 :root {
+  color-scheme: dark;
   font-family: Arial, Helvetica, sans-serif;
   font-synthesis: none;
   line-height: 1.5;
   text-rendering: optimizeLegibility;
-  --page: #eef1f4;
-  --surface: #ffffff;
-  --surface-soft: #f5f7f9;
-  --text: #1f2937;
-  --muted: #667281;
-  --line: #d7dde5;
-  --accent: #2563eb;
-  --accent-soft: #dbeafe;
-  --success: #15803d;
-  --success-soft: #dcfce7;
-  --danger: #c62828;
-  --danger-soft: #fee2e2;
-  --hint: #a14d00;
-  --hint-soft: #ffedd5;
+  --page: #0f141b;
+  --surface: #171e27;
+  --surface-soft: #202936;
+  --text: #eef2f7;
+  --muted: #9aa7b6;
+  --line: #344152;
+  --accent: #6ea8fe;
+  --accent-soft: #233b63;
+  --success: #64d28b;
+  --success-soft: #173c29;
+  --danger: #ff7c8a;
+  --danger-soft: #45212a;
+  --hint: #ffbd6a;
+  --hint-soft: #432f18;
 }
 
 * {
@@ -229,7 +230,7 @@ h2 {
 
 .mission-nav button.current {
   border-color: var(--accent);
-  color: #ffffff;
+  color: #0f141b;
   background: var(--accent);
 }
 
@@ -414,7 +415,7 @@ code {
 .button-primary {
   flex: 1;
   border-color: var(--accent);
-  color: #ffffff;
+  color: #0f141b;
   background: var(--accent);
 }
 
@@ -433,19 +434,19 @@ code {
 }
 
 .feedback-success {
-  border-color: #86c69b;
+  border-color: #347451;
   color: var(--success);
   background: var(--success-soft);
 }
 
 .feedback-error {
-  border-color: #efa2a2;
+  border-color: #7a3b46;
   color: var(--danger);
   background: var(--danger-soft);
 }
 
 .feedback-hint {
-  border-color: #f2bd7a;
+  border-color: #79552b;
   color: var(--hint);
   background: var(--hint-soft);
 }
@@ -477,7 +478,7 @@ code {
 }
 
 .stars {
-  color: #c27900;
+  color: #f8bd58;
   letter-spacing: 0.05em;
 }
 
@@ -699,7 +700,7 @@ code {
   align-items: center;
   justify-content: center;
   border-radius: 6px;
-  color: #ffffff;
+  color: #0f141b;
   background: var(--success);
 }
 
