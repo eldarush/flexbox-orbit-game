@@ -349,14 +349,15 @@ legend {
 select {
   width: 100%;
   min-height: 44px;
-  padding: 0 34px 0 12px;
+  /* The longest value, space-between, has to clear the native dropdown arrow. */
+  padding: 0 26px 0 11px;
   border: 1px solid var(--line);
   border-radius: 11px;
   color: var(--text);
   background: var(--surface-raised);
   cursor: pointer;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.78rem;
+  font-size: 0.72rem;
 }
 
 select:hover,
@@ -486,9 +487,20 @@ code {
 }
 
 .board-panel {
+  display: flex;
   min-width: 0;
   flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: center;
   padding: 28px;
+}
+
+.board-panel > .board-heading {
+  margin-bottom: auto;
+}
+
+.board-panel > .board-tip {
+  margin-top: auto;
 }
 
 .board-heading {
@@ -538,9 +550,15 @@ code {
 .board-scroll {
   max-width: 100%;
   overflow-x: auto;
-  padding-bottom: 5px;
   border-radius: 20px;
   scrollbar-color: var(--cyan-dark) transparent;
+}
+
+/* The stage keeps the scaled board's footprint in the document flow, so the
+   panel below it never overlaps the playfield. */
+.board-stage {
+  width: 100%;
+  height: 360px;
 }
 
 .board-scroll:focus-visible {
@@ -552,8 +570,9 @@ code {
   position: relative;
   width: 640px;
   height: 360px;
-  flex: 0 0 640px;
   overflow: hidden;
+  transform: scale(var(--board-scale, 1));
+  transform-origin: top left;
   border: 1px solid #34506a;
   border-radius: 20px;
   background:
@@ -597,7 +616,6 @@ code {
   position: absolute;
   inset: 20px;
   display: flex;
-  align-content: space-around;
 }
 
 .target-layer {
@@ -736,6 +754,265 @@ code {
   text-underline-offset: 4px;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+#itemFieldset {
+  margin-top: 18px;
+}
+
+.control-fields-items label {
+  flex-basis: 100%;
+}
+
+.control-fields-items label > span {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.feedback-hint {
+  border-color: rgba(255, 198, 107, 0.5);
+  color: var(--amber);
+  background: rgba(255, 198, 107, 0.08);
+}
+
+.mission-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0 0;
+}
+
+.mission-stats > div {
+  min-width: 68px;
+  flex: 1 1 0;
+  padding: 9px 11px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.mission-stats dt {
+  color: var(--muted);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.mission-stats dd {
+  margin: 4px 0 0;
+  font-size: 0.95rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.stars {
+  color: var(--amber);
+  letter-spacing: 0.06em;
+}
+
+.ghost-button {
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 198, 107, 0.4);
+  border-radius: 11px;
+  color: var(--amber);
+  background: rgba(255, 198, 107, 0.06);
+  cursor: pointer;
+  font-size: 0.73rem;
+  font-weight: 800;
+}
+
+.ghost-button:hover:not(:disabled),
+.ghost-button:focus-visible:not(:disabled) {
+  border-color: var(--amber);
+}
+
+.ghost-button:disabled {
+  border-color: var(--line);
+  color: var(--muted);
+  background: transparent;
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.header-link {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.header-link:hover,
+.header-link:focus-visible {
+  color: var(--cyan);
+}
+
+.section-title {
+  margin-bottom: 18px;
+  font-size: 1.35rem;
+}
+
+.stats-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 40px;
+  padding: 22px 26px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(16, 28, 45, 0.72);
+}
+
+.stats-link p:last-of-type {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.stats-link a {
+  flex: 0 0 auto;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.stat-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 0 0 44px;
+  padding: 0;
+  list-style: none;
+}
+
+.stat-card {
+  display: flex;
+  min-width: 172px;
+  flex: 1 1 172px;
+  flex-direction: column;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(16, 28, 45, 0.9);
+}
+
+.stat-card-label {
+  color: var(--muted);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.stat-card-value {
+  margin: 10px 0 6px;
+  font-size: 1.9rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+}
+
+.stat-card-note {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.empty-state {
+  padding: 26px;
+  border: 1px dashed var(--line);
+  border-radius: 18px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.empty-state[hidden] {
+  display: none;
+}
+
+.empty-state a {
+  color: var(--cyan);
+}
+
+.rule-list {
+  margin: 0 0 60px;
+  padding: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 2;
+  list-style: none;
+}
+
+.rule-list strong {
+  color: var(--text);
+}
+
+.log-panel {
+  margin-bottom: 56px;
+  padding: 8px 20px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(16, 28, 45, 0.72);
+}
+
+.log-panel[hidden] {
+  display: none;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.log-panel table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.76rem;
+  white-space: nowrap;
+}
+
+.log-panel th,
+.log-panel td {
+  padding: 11px 12px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+}
+
+.log-panel thead th {
+  color: var(--muted);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.log-panel tbody th {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.log-panel tbody tr.is-cleared th {
+  color: var(--success);
+}
+
+.log-panel td.properties {
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.68rem;
+}
+
+.log-panel tfoot th,
+.log-panel tfoot td {
+  border-bottom: 0;
+  color: var(--text);
+  font-weight: 800;
+}
+
 @keyframes docked {
   0% { transform: scale(1); }
   45% { transform: scale(1.12) rotate(3deg); }
@@ -779,7 +1056,7 @@ code {
   }
 
   .brand > span:last-child,
-  .header-stats span:last-child {
+  .header-stats > span:nth-child(2) {
     display: none;
   }
 
@@ -802,6 +1079,7 @@ code {
   }
 
   .control-fields {
+    align-items: stretch;
     flex-direction: column;
   }
 
@@ -812,9 +1090,20 @@ code {
 
   .form-actions,
   .board-heading,
-  .completion-panel {
+  .completion-panel,
+  .mission-footer {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .log-panel {
+    padding: 6px 14px;
+  }
+
+  .stats-link {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 16px;
   }
 
   .button {
