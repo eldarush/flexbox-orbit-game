@@ -68,12 +68,12 @@ function renderCards() {
   const fastest = state.solveTimes.filter((time, index) => isComplete(index) && time > 0);
 
   elements.statCards.replaceChildren(
-    buildCard("Missions cleared", `${cleared} / ${missions.length}`, cleared === missions.length ? "Route complete" : `${missions.length - cleared} still to fly`),
-    buildCard("Total score", String(sum(state.scores)), `of a possible ${missions.length * 120}`),
-    buildCard("Stars earned", `${sum(state.stars)} / ${missions.length * 3}`, "three per perfect mission"),
-    buildCard("Time on task", formatDuration(sum(state.solveTimes)), fastest.length === 0 ? "no solves recorded" : `fastest ${formatDuration(Math.min(...fastest))}`),
-    buildCard("Attempts", String(attempts), cleared === 0 ? "no missions cleared yet" : `${averageAttempts.toFixed(1)} per cleared mission`),
-    buildCard("Hints used", String(sum(state.hints)), `${sum(state.hints) * HINT_COST} points given up`),
+    buildCard("Cleared", `${cleared} / ${missions.length}`, `${missions.length - cleared} remaining`),
+    buildCard("Score", String(sum(state.scores)), `max ${missions.length * 120}`),
+    buildCard("Stars", `${sum(state.stars)} / ${missions.length * 3}`, "three per mission"),
+    buildCard("Time", formatDuration(sum(state.solveTimes)), fastest.length === 0 ? "no solves" : `best ${formatDuration(Math.min(...fastest))}`),
+    buildCard("Attempts", String(attempts), cleared === 0 ? "none yet" : `${averageAttempts.toFixed(1)} average`),
+    buildCard("Hints", String(sum(state.hints)), `${sum(state.hints) * HINT_COST} points spent`),
   );
 }
 

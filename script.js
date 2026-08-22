@@ -289,8 +289,8 @@ function updateBoardScale() {
   elements.boardStage.style.height = `${Math.round(BOARD_HEIGHT * boardScale)}px`;
   elements.scaleNote.textContent =
     boardScale === 1
-      ? `The mission board is always ${BOARD_WIDTH} × ${BOARD_HEIGHT}.`
-      : `The mission board is always ${BOARD_WIDTH} × ${BOARD_HEIGHT}, shown here at ${Math.round(boardScale * 100)}% so the whole field fits. Every solution stays identical.`;
+      ? `Board size: ${BOARD_WIDTH} × ${BOARD_HEIGHT}.`
+      : `Board size: ${BOARD_WIDTH} × ${BOARD_HEIGHT}, shown at ${Math.round(boardScale * 100)}%.`;
 }
 
 /* Positions are read relative to the board and divided by the display scale,
@@ -489,8 +489,8 @@ function loadMission(index) {
   setFeedback(
     isMissionComplete(index) ? "success" : "neutral",
     isMissionComplete(index)
-      ? "Mission already cleared. Replay the formation or continue to the next mission."
-      : "Match each ship with a glowing beacon, then check your docking.",
+      ? "Cleared. Replay it or continue."
+      : "Match the ships to the targets.",
   );
 
   renderNavigation();
@@ -545,7 +545,7 @@ function revealHint() {
   const difference = findFirstDifference(mission, readControls(mission));
 
   if (!difference) {
-    setFeedback("neutral", "Your controls already match a working solution — press Check docking.");
+    setFeedback("neutral", "The controls look right. Press Check.");
     return;
   }
 
@@ -581,7 +581,7 @@ function checkSolution(event) {
     window.setTimeout(() => elements.playfield.classList.remove("is-error"), 420);
     setFeedback(
       "error",
-      `${misplaced} ${misplaced === 1 ? "ship is" : "ships are"} still away from a beacon. Adjust the controls and try again.`,
+      `${misplaced} ${misplaced === 1 ? "ship is" : "ships are"} not docked yet.`,
     );
     updateMissionStats();
     updateSummary();
@@ -614,8 +614,8 @@ function checkSolution(event) {
   setFeedback(
     "success",
     alreadyComplete
-      ? "Perfect docking. This mission stays complete."
-      : `Docking confirmed in ${formatDuration(solveTime)} — ${earned} points, ${renderStars(stars)}. The next route is unlocked.`,
+      ? "Docked. This mission stays complete."
+      : `Cleared in ${formatDuration(solveTime)} · ${earned} points · ${renderStars(stars)}`,
   );
 
   renderNavigation();
@@ -630,7 +630,7 @@ function resetMission() {
   updateBoard();
   rememberControls();
   saveState();
-  setFeedback("neutral", "Controls reset to their default values. Try a new formation.");
+  setFeedback("neutral", "Controls reset.");
 }
 
 function goToNextMission() {

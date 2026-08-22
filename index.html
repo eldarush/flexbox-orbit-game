@@ -3,43 +3,33 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta
-      name="description"
-      content="Orbit Shift is an interactive game for learning Flexbox through twelve space missions."
-    >
-    <title>Orbit Shift | Learn Flexbox</title>
+    <meta name="description" content="Orbit Shift is a twelve-level game for practicing Flexbox.">
+    <title>Orbit Shift | Flexbox Game</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="#game" aria-label="Orbit Shift home">
-          <span class="brand-mark" aria-hidden="true">OS</span>
-          <span>Orbit Shift</span>
-        </a>
-
-        <a class="header-link" href="stats.html">Statistics</a>
+        <a class="brand" href="#game">Orbit Shift</a>
+        <a class="header-link" href="stats.html">Stats</a>
 
         <div class="header-stats" role="group" aria-label="Game summary">
           <span><strong id="headerScore">0</strong> points</span>
           <span><strong id="headerStars">0</strong> stars</span>
-          <span><strong id="headerCompleted">0</strong> / <span id="headerTotal">12</span> cleared</span>
+          <span><strong id="headerCompleted">0</strong>/<span id="headerTotal">12</span> cleared</span>
         </div>
       </div>
     </header>
 
     <main id="game">
       <section class="hero container" aria-labelledby="page-title">
-        <p class="eyebrow">Flexbox training simulator</p>
-        <h1 id="page-title">Guide the fleet.<br>Master the layout.</h1>
-        <p>
-          Change the Flexbox controls to move every spacecraft onto its matching docking beacon.
-          Twelve missions take you from a single row to wrapped, reversed and re-ordered formations.
-        </p>
+        <p class="eyebrow">Flexbox practice</p>
+        <h1 id="page-title">Orbit Shift</h1>
+        <p>Move the ships onto their targets using Flexbox.</p>
 
         <div class="progress-block">
           <div class="progress-copy">
-            <span>Mission progress</span>
+            <span>Progress</span>
             <span id="progressText">0 of 12 complete</span>
           </div>
           <progress class="progress-track" aria-label="Completed missions" id="progressTrack" max="12" value="0">
@@ -58,76 +48,57 @@
           </div>
 
           <h2 id="missionTitle">Edge of Orbit</h2>
-          <p class="mission-instruction" id="missionInstruction">
-            Place the three scout ships in one row, spread them from edge to edge, and center them vertically.
-          </p>
+          <p class="mission-instruction" id="missionInstruction">Spread three ships across one centered row.</p>
 
           <form id="controlForm">
             <fieldset>
-              <legend>Flex container controls</legend>
+              <legend>Container</legend>
               <div class="control-fields" id="containerControls"></div>
             </fieldset>
 
             <fieldset id="itemFieldset" hidden>
-              <legend>Individual ship controls</legend>
+              <legend>Ships</legend>
               <div class="control-fields control-fields-items" id="itemControls"></div>
             </fieldset>
 
             <section class="code-preview" aria-label="Current CSS declaration">
-              <span class="code-label">Current CSS</span>
+              <span class="code-label">CSS</span>
               <pre><code id="codePreview"></code></pre>
             </section>
 
             <div class="form-actions">
-              <button class="button button-secondary" type="button" id="resetButton">Reset mission</button>
-              <button class="button button-primary" type="submit" id="checkButton">Check docking</button>
+              <button class="button button-secondary" type="button" id="resetButton">Reset</button>
+              <button class="button button-primary" type="submit" id="checkButton">Check</button>
             </div>
           </form>
 
           <div class="feedback feedback-neutral" id="feedback" role="status" aria-live="polite">
-            Match each ship with a glowing beacon, then check your docking.
+            Match the ships to the targets.
           </div>
 
-          <dl class="mission-stats" aria-label="Mission statistics">
-            <div>
-              <dt>Attempts</dt>
-              <dd id="attemptCount">0</dd>
-            </div>
-            <div>
-              <dt>Time</dt>
-              <dd id="missionTimer">0:00</dd>
-            </div>
-            <div>
-              <dt>Hints</dt>
-              <dd id="hintCount">0</dd>
-            </div>
-            <div>
-              <dt>Rating</dt>
-              <dd class="stars" id="missionStars">☆☆☆</dd>
-            </div>
+          <dl class="mission-stats">
+            <div><dt>Attempts</dt><dd id="attemptCount">0</dd></div>
+            <div><dt>Time</dt><dd id="missionTimer">0:00</dd></div>
+            <div><dt>Hints</dt><dd id="hintCount">0</dd></div>
+            <div><dt>Rating</dt><dd class="stars" id="missionStars">☆☆☆</dd></div>
           </dl>
 
           <div class="mission-footer">
-            <button class="ghost-button" type="button" id="hintButton">Reveal a hint (−15 pts)</button>
-            <button class="next-button" type="button" id="nextButton" disabled>
-              Next mission <span aria-hidden="true">→</span>
-            </button>
+            <button class="ghost-button" type="button" id="hintButton">Hint (-15 points)</button>
+            <button class="next-button" type="button" id="nextButton" disabled>Next →</button>
           </div>
         </aside>
 
         <section class="board-panel" aria-labelledby="boardTitle">
           <div class="board-heading">
-            <div>
-              <p class="eyebrow">Live simulator</p>
-              <h2 id="boardTitle">Docking field</h2>
-            </div>
+            <h2 id="boardTitle">Board</h2>
             <div class="board-key" role="group" aria-label="Board legend">
               <span><i class="key-ship" aria-hidden="true"></i> Ships</span>
               <span><i class="key-dock" aria-hidden="true"></i> Targets</span>
             </div>
           </div>
 
-          <p class="scroll-note" id="scaleNote">The mission board is always 640 × 360.</p>
+          <p class="scroll-note" id="scaleNote">Board size: 640 × 360.</p>
 
           <div class="board-scroll" tabindex="0" aria-label="Game board">
             <div class="board-stage" id="boardStage">
@@ -140,35 +111,29 @@
             </div>
           </div>
 
-          <p class="board-tip" id="missionTip">
-            Tip: justify-content controls movement along the main axis.
-          </p>
+          <p class="board-tip" id="missionTip">Tip: use justify-content and align-items.</p>
         </section>
       </section>
 
       <section class="stats-link container" aria-label="Statistics">
-        <div>
-          <p class="eyebrow">Flight recorder</p>
-          <p>Attempts, solve times, hints, ratings and score are recorded for every mission.</p>
-        </div>
-        <a class="button button-secondary" href="stats.html">Open mission log &amp; statistics</a>
+        <p>Want the full mission history?</p>
+        <a class="button button-secondary" href="stats.html">Open stats</a>
       </section>
 
       <section class="completion-panel container" id="completionPanel" hidden aria-labelledby="completionTitle">
         <div class="completion-icon" aria-hidden="true">★</div>
         <div>
-          <p class="eyebrow">Flight path complete</p>
-          <h2 id="completionTitle">You mastered every formation.</h2>
-          <p id="completionSummary">Your fleet is docked and the Flexbox route is complete.</p>
+          <h2 id="completionTitle">All missions cleared.</h2>
+          <p id="completionSummary">You completed the Flexbox route.</p>
         </div>
-        <button class="button button-secondary" type="button" id="restartButton">Start a fresh run</button>
+        <button class="button button-secondary" type="button" id="restartButton">Restart</button>
       </section>
     </main>
 
     <footer class="site-footer">
       <div class="container footer-inner">
-        <p>Orbit Shift — a Flexbox learning game</p>
-        <button type="button" id="clearProgressButton">Clear saved progress</button>
+        <p>Orbit Shift · Flexbox game</p>
+        <button type="button" id="clearProgressButton">Clear progress</button>
       </div>
     </footer>
 
