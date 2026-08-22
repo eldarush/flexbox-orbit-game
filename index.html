@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="Orbit Shift is an interactive game for learning Flexbox through eight space missions."
+      content="Orbit Shift is an interactive game for learning Flexbox through twelve space missions."
     >
     <title>Orbit Shift | Learn Flexbox</title>
     <link rel="stylesheet" href="styles.css">
@@ -20,7 +20,8 @@
 
         <div class="header-stats" role="group" aria-label="Game summary">
           <span><strong id="headerScore">0</strong> points</span>
-          <span><strong id="headerCompleted">0</strong> / 8 cleared</span>
+          <span><strong id="headerStars">0</strong> stars</span>
+          <span><strong id="headerCompleted">0</strong> / <span id="headerTotal">12</span> cleared</span>
         </div>
       </div>
     </header>
@@ -31,16 +32,16 @@
         <h1 id="page-title">Guide the fleet.<br>Master the layout.</h1>
         <p>
           Change the Flexbox controls to move every spacecraft onto its matching docking beacon.
-          Eight missions take you from the basics to wrapped, reversed formations.
+          Twelve missions take you from a single row to wrapped, reversed and re-ordered formations.
         </p>
 
         <div class="progress-block">
           <div class="progress-copy">
             <span>Mission progress</span>
-            <span id="progressText">0 of 8 complete</span>
+            <span id="progressText">0 of 12 complete</span>
           </div>
-          <progress class="progress-track" aria-label="Completed missions" id="progressTrack" max="8" value="0">
-            0 of 8 complete
+          <progress class="progress-track" aria-label="Completed missions" id="progressTrack" max="12" value="0">
+            0 of 12 complete
           </progress>
         </div>
       </section>
@@ -50,7 +51,7 @@
       <section class="workspace container" aria-label="Flexbox mission workspace">
         <aside class="control-panel" aria-labelledby="missionTitle">
           <div class="mission-meta">
-            <span id="missionNumber">Mission 1 of 8</span>
+            <span id="missionNumber">Mission 1 of 12</span>
             <span class="difficulty" id="missionDifficulty">Cadet</span>
           </div>
 
@@ -62,58 +63,17 @@
           <form id="controlForm">
             <fieldset>
               <legend>Flex container controls</legend>
+              <div class="control-fields" id="containerControls"></div>
+            </fieldset>
 
-              <div class="control-fields">
-                <label>
-                  <span>flex-direction</span>
-                  <select id="flexDirection" name="flex-direction">
-                    <option value="row">row</option>
-                    <option value="row-reverse">row-reverse</option>
-                    <option value="column">column</option>
-                    <option value="column-reverse">column-reverse</option>
-                  </select>
-                </label>
-
-                <label>
-                  <span>justify-content</span>
-                  <select id="justifyContent" name="justify-content">
-                    <option value="flex-start">flex-start</option>
-                    <option value="center">center</option>
-                    <option value="flex-end">flex-end</option>
-                    <option value="space-between">space-between</option>
-                    <option value="space-around">space-around</option>
-                    <option value="space-evenly">space-evenly</option>
-                  </select>
-                </label>
-
-                <label>
-                  <span>align-items</span>
-                  <select id="alignItems" name="align-items">
-                    <option value="flex-start">flex-start</option>
-                    <option value="center">center</option>
-                    <option value="flex-end">flex-end</option>
-                    <option value="stretch">stretch</option>
-                  </select>
-                </label>
-
-                <label>
-                  <span>flex-wrap</span>
-                  <select id="flexWrap" name="flex-wrap">
-                    <option value="nowrap">nowrap</option>
-                    <option value="wrap">wrap</option>
-                    <option value="wrap-reverse">wrap-reverse</option>
-                  </select>
-                </label>
-              </div>
+            <fieldset id="itemFieldset" hidden>
+              <legend>Individual ship controls</legend>
+              <div class="control-fields control-fields-items" id="itemControls"></div>
             </fieldset>
 
             <section class="code-preview" aria-label="Current CSS declaration">
               <span class="code-label">Current CSS</span>
-              <pre><code id="codePreview">display: flex;
-flex-direction: row;
-justify-content: flex-start;
-align-items: flex-start;
-flex-wrap: nowrap;</code></pre>
+              <pre><code id="codePreview"></code></pre>
             </section>
 
             <div class="form-actions">
@@ -126,8 +86,27 @@ flex-wrap: nowrap;</code></pre>
             Match each ship with a glowing beacon, then check your docking.
           </div>
 
+          <dl class="mission-stats" aria-label="Mission statistics">
+            <div>
+              <dt>Attempts</dt>
+              <dd id="attemptCount">0</dd>
+            </div>
+            <div>
+              <dt>Time</dt>
+              <dd id="missionTimer">0:00</dd>
+            </div>
+            <div>
+              <dt>Hints</dt>
+              <dd id="hintCount">0</dd>
+            </div>
+            <div>
+              <dt>Rating</dt>
+              <dd class="stars" id="missionStars">☆☆☆</dd>
+            </div>
+          </dl>
+
           <div class="mission-footer">
-            <span>Attempts: <strong id="attemptCount">0</strong></span>
+            <button class="ghost-button" type="button" id="hintButton">Reveal a hint (−15 pts)</button>
             <button class="next-button" type="button" id="nextButton" disabled>
               Next mission <span aria-hidden="true">→</span>
             </button>
@@ -146,14 +125,16 @@ flex-wrap: nowrap;</code></pre>
             </div>
           </div>
 
-          <p class="scroll-note">The mission board is always 640 × 360. On small screens, swipe sideways to inspect it.</p>
+          <p class="scroll-note" id="scaleNote">The mission board is always 640 × 360.</p>
 
-          <div class="board-scroll" tabindex="0" aria-label="Scrollable game board">
-            <div class="playfield" id="playfield">
-              <div class="orbit orbit-one" aria-hidden="true"></div>
-              <div class="orbit orbit-two" aria-hidden="true"></div>
-              <div class="target-layer" id="targetLayer" aria-hidden="true"></div>
-              <ul class="fleet-layer" id="fleetLayer" aria-label="Spacecraft flex container"></ul>
+          <div class="board-scroll" tabindex="0" aria-label="Game board">
+            <div class="board-stage" id="boardStage">
+              <div class="playfield" id="playfield">
+                <div class="orbit orbit-one" aria-hidden="true"></div>
+                <div class="orbit orbit-two" aria-hidden="true"></div>
+                <div class="target-layer" id="targetLayer" aria-hidden="true"></div>
+                <ul class="fleet-layer" id="fleetLayer" aria-label="Spacecraft flex container"></ul>
+              </div>
             </div>
           </div>
 
@@ -163,11 +144,43 @@ flex-wrap: nowrap;</code></pre>
         </section>
       </section>
 
+      <details class="mission-log container" id="missionLog">
+        <summary>Mission log &amp; statistics</summary>
+        <div class="table-scroll">
+          <table>
+            <caption class="visually-hidden">Attempts, time, hints, rating and score for every mission</caption>
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Mission</th>
+                <th scope="col">Status</th>
+                <th scope="col">Attempts</th>
+                <th scope="col">Time</th>
+                <th scope="col">Hints</th>
+                <th scope="col">Rating</th>
+                <th scope="col">Score</th>
+              </tr>
+            </thead>
+            <tbody id="missionLogBody"></tbody>
+            <tfoot>
+              <tr>
+                <th scope="row" colspan="3">Total</th>
+                <td id="totalAttempts">0</td>
+                <td id="totalTime">0:00</td>
+                <td id="totalHints">0</td>
+                <td id="totalStars">0</td>
+                <td id="totalScore">0</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </details>
+
       <section class="completion-panel container" id="completionPanel" hidden aria-labelledby="completionTitle">
         <div class="completion-icon" aria-hidden="true">★</div>
         <div>
           <p class="eyebrow">Flight path complete</p>
-          <h2 id="completionTitle">You mastered all eight formations.</h2>
+          <h2 id="completionTitle">You mastered every formation.</h2>
           <p id="completionSummary">Your fleet is docked and the Flexbox route is complete.</p>
         </div>
         <button class="button button-secondary" type="button" id="restartButton">Start a fresh run</button>

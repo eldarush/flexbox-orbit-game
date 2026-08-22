@@ -486,9 +486,20 @@ code {
 }
 
 .board-panel {
+  display: flex;
   min-width: 0;
   flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: center;
   padding: 28px;
+}
+
+.board-panel > .board-heading {
+  margin-bottom: auto;
+}
+
+.board-panel > .board-tip {
+  margin-top: auto;
 }
 
 .board-heading {
@@ -538,9 +549,15 @@ code {
 .board-scroll {
   max-width: 100%;
   overflow-x: auto;
-  padding-bottom: 5px;
   border-radius: 20px;
   scrollbar-color: var(--cyan-dark) transparent;
+}
+
+/* The stage keeps the scaled board's footprint in the document flow, so the
+   panel below it never overlaps the playfield. */
+.board-stage {
+  width: 100%;
+  height: 360px;
 }
 
 .board-scroll:focus-visible {
@@ -552,8 +569,9 @@ code {
   position: relative;
   width: 640px;
   height: 360px;
-  flex: 0 0 640px;
   overflow: hidden;
+  transform: scale(var(--board-scale, 1));
+  transform-origin: top left;
   border: 1px solid #34506a;
   border-radius: 20px;
   background:
@@ -597,7 +615,6 @@ code {
   position: absolute;
   inset: 20px;
   display: flex;
-  align-content: space-around;
 }
 
 .target-layer {
@@ -736,6 +753,161 @@ code {
   text-underline-offset: 4px;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+#itemFieldset {
+  margin-top: 18px;
+}
+
+.control-fields-items label {
+  flex-basis: 100%;
+}
+
+.control-fields-items label > span {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.feedback-hint {
+  border-color: rgba(255, 198, 107, 0.5);
+  color: var(--amber);
+  background: rgba(255, 198, 107, 0.08);
+}
+
+.mission-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0 0;
+}
+
+.mission-stats > div {
+  min-width: 68px;
+  flex: 1 1 0;
+  padding: 9px 11px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.mission-stats dt {
+  color: var(--muted);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.mission-stats dd {
+  margin: 4px 0 0;
+  font-size: 0.95rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.stars {
+  color: var(--amber);
+  letter-spacing: 0.06em;
+}
+
+.ghost-button {
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 198, 107, 0.4);
+  border-radius: 11px;
+  color: var(--amber);
+  background: rgba(255, 198, 107, 0.06);
+  cursor: pointer;
+  font-size: 0.73rem;
+  font-weight: 800;
+}
+
+.ghost-button:hover:not(:disabled),
+.ghost-button:focus-visible:not(:disabled) {
+  border-color: var(--amber);
+}
+
+.ghost-button:disabled {
+  border-color: var(--line);
+  color: var(--muted);
+  background: transparent;
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.mission-log {
+  margin-bottom: 40px;
+  padding: 18px 22px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(16, 28, 45, 0.72);
+}
+
+.mission-log summary {
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.mission-log summary::marker {
+  color: var(--cyan);
+}
+
+.table-scroll {
+  margin-top: 16px;
+  overflow-x: auto;
+}
+
+.mission-log table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.76rem;
+  white-space: nowrap;
+}
+
+.mission-log th,
+.mission-log td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+}
+
+.mission-log thead th {
+  color: var(--muted);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.mission-log tbody th {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.mission-log tbody tr.is-current {
+  background: rgba(97, 226, 221, 0.07);
+}
+
+.mission-log tbody tr.is-current th {
+  color: var(--cyan);
+}
+
+.mission-log tfoot th,
+.mission-log tfoot td {
+  border-bottom: 0;
+  color: var(--text);
+  font-weight: 800;
+}
+
 @keyframes docked {
   0% { transform: scale(1); }
   45% { transform: scale(1.12) rotate(3deg); }
@@ -779,7 +951,7 @@ code {
   }
 
   .brand > span:last-child,
-  .header-stats span:last-child {
+  .header-stats > span:nth-child(2) {
     display: none;
   }
 
@@ -802,6 +974,7 @@ code {
   }
 
   .control-fields {
+    align-items: stretch;
     flex-direction: column;
   }
 
@@ -812,9 +985,14 @@ code {
 
   .form-actions,
   .board-heading,
-  .completion-panel {
+  .completion-panel,
+  .mission-footer {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .mission-log {
+    padding: 16px;
   }
 
   .button {
